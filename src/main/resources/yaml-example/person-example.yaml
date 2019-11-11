@@ -1,0 +1,5 @@
+--- !!com.spring.boot.example.model.Person
+firstName:
+  Andrey
+age:
+  99

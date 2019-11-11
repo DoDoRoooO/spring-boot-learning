@@ -1,0 +1,16 @@
+---
+sample1:
+  name: 'gogogo'
+  age: 11
+  cars:
+    - 'BMW'
+    - 'Tesla'
+---
+sample2:
+  name: 'fire in the hole'
+  other: 'boooom'
+---
+sample3:
+  x: 11
+  y: 10
+  point: 0.5
