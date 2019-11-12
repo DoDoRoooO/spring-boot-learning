@@ -1,6 +1,6 @@
 package com.spring.boot.example.controller;
 
-import com.spring.boot.example.service.ArticleService;
+import com.spring.boot.example.service.ArticleJDBCService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +27,7 @@ public class ArticleRestControllerTest {
     private MockMvc mockMvc;
 
     @Resource
-    private ArticleService articleService;
+    private ArticleJDBCService articleJDBCService;
 
 //    @Before
 //    public void setUp() {

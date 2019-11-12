@@ -2,7 +2,7 @@ package com.spring.boot.example.controller;
 
 import com.spring.boot.example.config.base.AjaxResponse;
 import com.spring.boot.example.model.Article;
-import com.spring.boot.example.service.ArticleService;
+import com.spring.boot.example.service.ArticleJDBCService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +21,12 @@ import javax.annotation.Resource;
 public class ArticleRestController {
 
     @Resource
-    private ArticleService articleService;
+    private ArticleJDBCService articleJDBCService;
 
     @PostMapping("/article")
     public AjaxResponse saveArticle(@RequestBody Article article) {
         log.info("ArticleRestController#saveArticle(): {}", article);
-        Article result = articleService.saveArticle(article);
+        Article result = articleJDBCService.saveArticle(article);
         log.info("ArticleRestController#saveArticle() return :{}", result);
         return AjaxResponse.success(result);
     }
