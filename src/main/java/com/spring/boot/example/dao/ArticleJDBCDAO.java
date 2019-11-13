@@ -11,10 +11,7 @@ import java.util.List;
 @Repository
 public class ArticleJDBCDAO {
 
-    @Resource
-    private JdbcTemplate jdbcTemplate;
-
-    public void save(Article article) {
+    public void save(Article article, JdbcTemplate jdbcTemplate) {
         //jdbcTemplate.update适合于insert 、update和delete操作；
         jdbcTemplate.update(" insert into article (author, title, content, create_time) values (?, ?, ?, ?)",
                 article.getAuthor(),
@@ -23,11 +20,11 @@ public class ArticleJDBCDAO {
                 article.getCreateTime());
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Long id, JdbcTemplate jdbcTemplate) {
         jdbcTemplate.update("delete from article where id = ?", id);
     }
 
-    public void updateById(Article article) {
+    public void updateById(Article article, JdbcTemplate jdbcTemplate) {
         jdbcTemplate.update("UPDATE article SET author = ?, title = ? ,content = ?,create_time = ? WHERE id = ?",
                 article.getAuthor(),
                 article.getTitle(),
@@ -36,12 +33,12 @@ public class ArticleJDBCDAO {
                 article.getId());
     }
 
-    public Article findById(Long id) {
+    public Article findById(Long id, JdbcTemplate jdbcTemplate) {
         return (Article) jdbcTemplate.queryForObject("select * from article where id = ?", new Object[]{id},
                 new BeanPropertyRowMapper(Article.class));
     }
 
-    public List<Article> findAll() {
+    public List<Article> findAll(JdbcTemplate jdbcTemplate) {
         return (List<Article>) jdbcTemplate.query("SELECT * FROM article ", new BeanPropertyRowMapper(Article.class));
     }
 }

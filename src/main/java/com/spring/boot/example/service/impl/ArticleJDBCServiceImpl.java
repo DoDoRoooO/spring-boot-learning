@@ -5,23 +5,30 @@ import com.spring.boot.example.model.Article;
 import com.spring.boot.example.service.ArticleJDBCService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 @Slf4j
 public class ArticleJDBCServiceImpl implements ArticleJDBCService {
 
-    @Autowired
+    @Resource
     private ArticleJDBCDAO articleJDBCDAO;
+    @Resource
+    private JdbcTemplate primaryJdbcTemplate;
+    @Resource
+    private JdbcTemplate secondaryJdbcTemplate;
 
     @Transactional
     @Override
     public Article saveArticle(Article article) {
         log.info("ArticleJDBCServiceImpl#saveArticle(), param={}", article);
-        articleJDBCDAO.save(article);
+        articleJDBCDAO.save(article, primaryJdbcTemplate);
+        articleJDBCDAO.save(article, secondaryJdbcTemplate);
         if (article.getId() == null) {
             throw new RuntimeException();
         }
@@ -32,25 +39,27 @@ public class ArticleJDBCServiceImpl implements ArticleJDBCService {
     @Override
     public void deleteArticle(Long id) {
         log.info("ArticleJDBCServiceImpl#deleteArticle(), param={}", id);
-        articleJDBCDAO.deleteById(id);
+        articleJDBCDAO.deleteById(id, primaryJdbcTemplate);
+        articleJDBCDAO.deleteById(id, secondaryJdbcTemplate);
     }
 
     @Transactional
     @Override
     public void updateArticle(Article article) {
         log.info("ArticleJDBCServiceImpl#updateArticle(), param={}", article);
-        articleJDBCDAO.updateById(article);
+        articleJDBCDAO.updateById(article, primaryJdbcTemplate);
+        articleJDBCDAO.updateById(article, secondaryJdbcTemplate);
     }
 
     @Override
     public Article getArticle(Long id) {
         log.info("ArticleJDBCServiceImpl#getArticle(), param={}", id);
-        return articleJDBCDAO.findById(id);
+        return articleJDBCDAO.findById(id, secondaryJdbcTemplate);
     }
 
     @Override
     public List<Article> getAll() {
         log.info("ArticleJDBCServiceImpl#getAll()");
-        return articleJDBCDAO.findAll();
+        return articleJDBCDAO.findAll(secondaryJdbcTemplate);
     }
 }

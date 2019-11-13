@@ -20,7 +20,7 @@ public class ArticleJDBCServiceTest {
     @Test
     public void testSave() {
         Article article = new Article();
-        article.setAuthor("第一人");
+        article.setAuthor("第五人");
         article.setContent("ffffff");
         article.setTitle("fff");
         article.setCreateTime(new Date());
