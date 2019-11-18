@@ -18,7 +18,7 @@ public class TransactionManagerConfig {
     @Bean
     public UserTransaction userTransaction() throws SystemException {
         UserTransaction userTransaction = new UserTransactionImp();
-        userTransaction.setTransactionTimeout(10000);
+        userTransaction.setTransactionTimeout(600000);
         return userTransaction;
     }
 

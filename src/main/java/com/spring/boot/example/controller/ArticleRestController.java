@@ -2,7 +2,7 @@ package com.spring.boot.example.controller;
 
 import com.spring.boot.example.config.base.AjaxResponse;
 import com.spring.boot.example.model.Article;
-import com.spring.boot.example.service.ArticleJDBCService;
+import com.spring.boot.example.service.jdbc.ArticleJDBCService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

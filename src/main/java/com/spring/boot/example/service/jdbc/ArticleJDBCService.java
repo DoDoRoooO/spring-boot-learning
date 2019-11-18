@@ -1,4 +1,4 @@
-package com.spring.boot.example.service;
+package com.spring.boot.example.service.jdbc;
 
 import com.spring.boot.example.model.Article;
 

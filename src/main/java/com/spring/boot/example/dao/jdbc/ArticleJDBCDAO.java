@@ -1,4 +1,4 @@
-package com.spring.boot.example.dao;
+package com.spring.boot.example.dao.jdbc;
 
 import com.spring.boot.example.model.Article;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

@@ -1,10 +1,9 @@
-package com.spring.boot.example.service.impl;
+package com.spring.boot.example.service.jdbc.impl;
 
-import com.spring.boot.example.dao.ArticleJDBCDAO;
+import com.spring.boot.example.dao.jdbc.ArticleJDBCDAO;
 import com.spring.boot.example.model.Article;
-import com.spring.boot.example.service.ArticleJDBCService;
+import com.spring.boot.example.service.jdbc.ArticleJDBCService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
