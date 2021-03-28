@@ -27,6 +27,6 @@ public class DefaultUserServiceImpl implements UserDetailsService {
         final String encode = passwordEncoder.encode("123456");
 
         return new User("admin", encode,
-                        AuthorityUtils.commaSeparatedStringToAuthorityList("admin,docker,sysoper"));
+                        AuthorityUtils.commaSeparatedStringToAuthorityList("admin,docker,sysoper,ROLE_root,/main.html"));
     }
 }
