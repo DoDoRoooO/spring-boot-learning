@@ -1,6 +1,8 @@
 package com.spring.boot.example.security.config;
 
+import com.spring.boot.example.security.service.DefaultUserServiceImpl;
 import javax.annotation.Resource;
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,9 +10,12 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 /**
  * @ClassName SecurityConfig.java
@@ -24,6 +29,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
     private MyAuthenticationFailureHandler authenticationFailureHandler;
+
+    @Resource
+    private DefaultUserServiceImpl userService;
+
+    @Resource
+    private DataSource dataSource;
+
+    @Resource
+    private PersistentTokenRepository tokenRepository;
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -76,6 +91,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .anyRequest().authenticated()
 
             .and()
+            // remember me
+            .rememberMe()
+                // 自定义参数名称
+//                .rememberMeParameter()
+                // 自定义失效时间 默认两周
+//                .tokenValiditySeconds()
+                // 自定义remember-me 功能实现
+//                .rememberMeServices()
+                // 自定义登录逻辑
+                .userDetailsService(userService)
+                // 指定存储位置
+                .tokenRepository(tokenRepository)
+
+            .and()
 
             // 自定义异常处理
             .exceptionHandling()
@@ -86,5 +115,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
         ;
 
+    }
+
+    @Bean
+    public PersistentTokenRepository tokenRepository() {
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        // 设置数据源
+        tokenRepository.setDataSource(dataSource);
+        // 启动时是否创建表，第一次要，后面删除
+//        tokenRepository.setCreateTableOnStartup(true);
+        return tokenRepository;
     }
 }
