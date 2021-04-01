@@ -85,10 +85,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/images/**").hasAnyAuthority("root", "admin")
 
                 // access 使用自定义权限认证
-                .anyRequest().access("@myAccessPermissionServiceImpl.hasPermission(request, authentication)")
+//                .anyRequest().access("@myAccessPermissionServiceImpl.hasPermission(request, authentication)")
 
                 // 所有请求都必须被认证
-//                .anyRequest().authenticated()
+                .anyRequest().authenticated()
 
             .and()
             // remember me

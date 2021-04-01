@@ -29,4 +29,9 @@ public class LoginController {
         // 必须是重定向
         return "redirect:loginFail.html";
     }
+
+    @RequestMapping(value = "/demo")
+    public String demo() {
+        return "demo";
+    }
 }
