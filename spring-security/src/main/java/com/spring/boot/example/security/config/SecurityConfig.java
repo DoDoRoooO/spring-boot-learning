@@ -104,6 +104,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 指定存储位置
                 .tokenRepository(tokenRepository)
 
+
+            .and()
+            // 退出登录
+            .logout()
+                // 退出登录url
+                .logoutUrl("/logout")
+                // 退出登录成功url
+                .logoutSuccessUrl("/login.html")
+
+
             .and()
 
             // 自定义异常处理
