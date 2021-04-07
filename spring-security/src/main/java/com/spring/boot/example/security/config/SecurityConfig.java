@@ -50,7 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
             // 表单登录 自定义登录页面
-            .formLogin().loginPage("/login.html")
+            .formLogin()
+            .loginPage("/showLogin")
             // 自定义登录逻辑
             .loginProcessingUrl("/login")
             // 登录成功跳转页面 必须是post方式
@@ -69,7 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .authorizeRequests()
                 // 放行登录页面
-                .antMatchers("/login.html").permitAll()
+                .antMatchers("/showLogin").permitAll()
                 // 放行登录失败页面
                 .antMatchers("/loginFail.html").permitAll()
 //                .antMatchers(HttpMethod.POST, "/login.html").permitAll()
@@ -122,7 +123,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
             .and()
             // 关闭csrf 防护
-            .csrf().disable()
+//            .csrf().disable()
         ;
 
     }
