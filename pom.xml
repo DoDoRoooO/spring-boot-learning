@@ -12,13 +12,15 @@
         <module>spring-jdbc</module>
         <module>common</module>
         <module>spring-security</module>
+        <module>spring-security-oauth2</module>
     </modules>
 
     <properties>
-        <spring.boot.version>2.4.4</spring.boot.version>
+        <spring-boot.version>2.4.4</spring-boot.version>
         <hutool.version>5.5.8</hutool.version>
         <guava.version>29.0-jre</guava.version>
-        <mysql.connector.version>8.0.23</mysql.connector.version>
+        <mysql-connector.version>8.0.23</mysql-connector.version>
+        <spring-cloud.version>2020.0.2</spring-cloud.version>
     </properties>
 
     <dependencies>
@@ -60,14 +62,14 @@
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot.version}</version>
+                <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.connector.version}</version>
+                <version>${mysql-connector.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
