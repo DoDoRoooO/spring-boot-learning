@@ -20,7 +20,7 @@
     <properties>
         <spring-boot.version>2.4.4</spring-boot.version>
         <hutool.version>5.5.8</hutool.version>
-        <guava.version>29.0-jre</guava.version>
+        <guava.version>32.0.0-jre</guava.version>
         <mysql-connector.version>8.0.23</mysql-connector.version>
         <spring-cloud.version>2020.0.2</spring-cloud.version>
     </properties>
